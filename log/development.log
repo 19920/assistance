@@ -1274,3 +1274,53 @@ Completed 200 OK in 108ms (Views: 1.2ms | ActiveRecord: 6.4ms)
 
 
   [1m[36mUser Load (7.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started POST "/users" for 127.0.0.1 at 2018-07-30 17:54:23 +0200
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"first_name"=>"baptiste", "last_name"=>"mani2", "email"=>"test3@yahoo.com", "password"=>"[FILTERED]"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "test3@yahoo.com"], ["LIMIT", 1]]
+  [1m[35mSQL (2.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "password_digest", "auth_token", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "baptiste"], ["last_name", "mani2"], ["email", "test3@yahoo.com"], ["password_digest", "$2a$10$9WxlOqYFLafx/gnW3.bZbOPycMWYYhFrFn9Bz/EKXMOJ373Lsk0ji"], ["auth_token", "3xkRFxAwV45DFQc5EpNgvAYj"], ["created_at", "2018-07-30 15:54:23.984678"], ["updated_at", "2018-07-30 15:54:23.984678"]]
+  [1m[35m (3.2ms)[0m  [1m[36mcommit transaction[0m
+Completed 200 OK in 121ms (Views: 0.5ms | ActiveRecord: 7.7ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-07-30 17:54:27 +0200
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"first_name"=>"baptiste", "last_name"=>"mani2", "email"=>"test3@yahoo.com", "password"=>"[FILTERED]"}}
+  [1m[35m (0.7ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "test3@yahoo.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 88ms (ActiveRecord: 1.1ms)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Email has already been taken):
+  
+app/controllers/users_controller.rb:8:in `create'
+Started POST "/login" for 127.0.0.1 at 2018-07-30 17:56:16 +0200
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"jbatgoal@yahoo.fr", "password"=>"[FILTERED]", "session"=>{"email"=>"jbatgoal@yahoo.fr", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "jbatgoal@yahoo.fr"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 100ms (ActiveRecord: 0.8ms)
+
+
+  
+NoMethodError (undefined method `&' for #<User:0x007fb453d2fdc0>):
+  
+app/models/user.rb:12:in `validate_login'
+app/controllers/sessions_controller.rb:4:in `create'
+Started POST "/login" for 127.0.0.1 at 2018-07-30 18:00:07 +0200
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"jbatgoal@yahoo.fr", "password"=>"[FILTERED]", "session"=>{"email"=>"jbatgoal@yahoo.fr", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "jbatgoal@yahoo.fr"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? AND ("users"."id" != ?) LIMIT ?[0m  [["email", "jbatgoal@yahoo.fr"], ["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (3.6ms)[0m  [1m[33mUPDATE "users" SET "auth_token" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["auth_token", "F1kXqZgCqc3kssBqAqW19fGD"], ["updated_at", "2018-07-30 16:00:08.028062"], ["id", 2]]
+  [1m[35m (6.2ms)[0m  [1m[36mcommit transaction[0m
+Completed 500 Internal Server Error in 286ms (Views: 0.5ms | ActiveRecord: 12.7ms)
+
+
+  
+NoMethodError (undefined method `sign_in' for #<SessionsController:0x007fb453c99d48>):
+  
+app/controllers/sessions_controller.rb:7:in `create'
