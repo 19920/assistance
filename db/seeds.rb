@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 1.times do |requests|
    Request.create!(
-      title: "Need help",
+      title: "Need jacket",
       description: "am stacked on the road ant it is so cold i need some jackets",
-      address: "norrtullsgatan 29",
+      address: "norrtullsgatan 48",
       latitude: 61.31,
       longitude: 17.02,
       request_type: "materiel",

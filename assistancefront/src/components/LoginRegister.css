@@ -1,0 +1,30 @@
+.back {
+
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+  
+  .div-center {
+    width: 400px;
+    height: 400px;
+    background-color: #fff;
+    position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    padding:15px 15px;
+      margin:120px;
+    border-bottom: 2px solid #ccc;
+    display: table;
+   font-style: oblique;
+  }
+  
+  div.content {
+    display: table-cell;
+    vertical-align: middle;
+  }

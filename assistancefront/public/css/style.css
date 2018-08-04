@@ -1,0 +1,64 @@
+body{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.navbar {
+        border:0;
+        border-radius: 0;
+        
+        padding:0;
+        margin-right:2px;
+        height: inherit;
+        font-size: 20px;
+        float: right;
+        
+        
+    }
+    .nav{
+        color: white;
+        
+    }
+
+.navbar-brand{
+   font-size: 30px;
+   color: black;
+}
+
+
+#note{
+    font-size: 30px;
+    margin-bottom: 30px;
+    color: black;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.lead,h3{
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: black;
+} 
+img{
+    width: 450px;
+    height: 292px;
+}
+#film{
+    color: white;
+}
+h1{
+    color: red;
+    background-color: white;
+}
+#text{
+    font-size: 30px;
+    margin-bottom: 30px;
+    color: black;
+    font-family: sans-serif;
+    font-weight: bold;}
+    div#root{
+        width: 100%;
+        margin: 0px,auto;
+        height: 100%;
+        font-size: 27px;
+      }

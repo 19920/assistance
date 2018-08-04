@@ -1,45 +1,43 @@
 import React,{Component} from 'react';
 
-class RequestList extends Component{
-    constructor(){
-        super()
+class RequestsList extends Component{
+    constructor(props){
+        super(props);
         this.state = {
-            requestList: null,
-            requestListLoaded: false,
-        };
+            requestsList: null,
+            requestsLoaded: false,
+        }
     }
     componentDidMount(){
         fetch('/requests')
-         .then(res => res.json())
-         .then(res =>{
-             console.log(res);
-            this.setState({
-                requestList: res.requests,
-                requestListLoaded: true
-            })
-         }).catch(err => console.log(err));
+          .then(res => res.json())
+          .then(res => {
+              console.log(res),
+              this.setState({
+                  requestsList: res.requests,
+                  requestsLoaded: true,
+              })
+          }).catch(err => console.log(err))
     }
     renderRequests(){
-        const {requestList} = this.state;
-        return requestList.map(request => {
+        const {requestsList} = this.state;
+        return requestsList.map(request=>{
             return(
-                <div className="request" key ={request.id}>
-                <p>{request.title}</p>
+                <div className="requests" key={request.id}>
                 <p>{request.description}</p>
-                <p>{request.address}</p>
-                <p>{request.status}</p>
-                <p>{request.request_type}</p>
+
                 </div>
             )
         })
     }
     render(){
         return(
-            <div className ="request-List">
-            {(this.state.requestListLoaded)? this.renderRequests()
-            :<p>Loading.....</p>}
-            </div>
+        <div className ="request-list">
+        {(this.state.requestsLoaded)?this.renderRequests()
+        :<p>Loading...</p>
+        }
+        </div>
         )
     }
 }
-export default RequestList;
+export default RequestsList;

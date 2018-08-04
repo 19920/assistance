@@ -1,4 +1,6 @@
 import React,{Component} from 'react';
+import {BrowserRouter,Link, Redirect,Route} from 'react-router-dom';
+import './LoginRegister.css';
 class RegisterForm extends Component{
     constructor(props){
         super(props);
@@ -6,7 +8,9 @@ class RegisterForm extends Component{
             first_name: '',
             last_name: '',
             email: '',
-            password: ''
+            password: '',
+            latitude:'',
+            longitude:''
 
         };
         this.handleChange = this.handleChange.bind(this);
@@ -20,16 +24,46 @@ class RegisterForm extends Component{
     }
     render(){
         return(
-            <div className ="form">
-            <form onSubmit ={(e) =>this.props.handleRegisterSubmit(e,this.state)}>
-            <input type="text" name = "first_name" placeholder ="firstname" value = {this.state.first_name} onChange = {this.handleChange} />
-            <input type="text" name = "last_name" placeholder ="lastname" value = {this.state.last_name} onChange = {this.handleChange} />
-            <input type="email" name = "email" placeholder ="email" value = {this.state.email} onChange = {this.handleChange} />
-            <input type="password" name = "password" placeholder ="password" value = {this.state.password} onChange = {this.handleChange} />
-            <input type = "submit" value ="Register" />
+            <div className="back">
 
-        </form>
-            </div>
+
+<div className="div-center">
+
+
+<div className="content">
+
+
+    <h3>Register</h3>
+    <hr />
+    <form onSubmit = {(e) =>this.props.handleLoginSubmit(e,this.state)}>
+    <div className="form-group">
+        <label for="exampleInputEmail1">Firstname</label>
+        <input className="from-control" type="text" name = "first_name" value = {this.state.first_name} onChange = {this.handleChange} />
+    </div>
+    <div className="form-group">
+        <label for="exampleInputEmail1">Lastname</label>
+        <input className="from-control" type="text" name = "last_name"  value = {this.state.last_name} onChange = {this.handleChange} />
+    </div>
+    <div className="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" name = "email"  value = {this.state.email} onChange = {this.handleChange} />
+    </div>
+    <div className="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" name = "password"  value = {this.state.password} onChange = {this.handleChange} />
+    </div>
+    <button type="submit" className="btn btn-primary">Register</button>
+    <hr />
+    <Link to = "/login"><button className="btn btn-link"  onClick ={this.handleLogout}>Login</button></Link>
+    <button type="button" className="btn btn-link">Reset Password</button>
+
+    </form>
+
+</div>
+
+
+</div>
+</div>
 
         )
     }

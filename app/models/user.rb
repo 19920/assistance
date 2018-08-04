@@ -1,8 +1,10 @@
 class User < ApplicationRecord
+   
     validates_uniqueness_of :email
     has_secure_password
     has_secure_token :auth_token
     has_many :requests
+   
 
     def invalidate_token
         self.update_columns(auth_token: nil)
