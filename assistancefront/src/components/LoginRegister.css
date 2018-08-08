@@ -1,5 +1,4 @@
 .back {
-
     width: 100%;
     position: absolute;
     top: 0;
@@ -27,4 +26,14 @@
   div.content {
     display: table-cell;
     vertical-align: middle;
+    background-image: url(./App.jpg);
+    color: white;
+  }
+  .request{
+   padding-top:100px;
+   
+  }
+  input{
+    border: 1px solid black;
+    border-radius: 8px;
   }

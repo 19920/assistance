@@ -8,7 +8,7 @@ export class MapWindowInfo extends Component {
     return(
       <InfoWindow onCloseClick={this.props.closeWindow}>
         <div className="bg-dark text-light">
-          <h1><strong>{title}</strong></h1>
+          <h1>{title}</h1>
           <p><strong>{description}</strong></p>
         </div>
       </InfoWindow>

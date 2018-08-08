@@ -1,9 +1,16 @@
 .requests{
-    background-color:black;
+ 
+    
+  }
+  .mapAndrequest{
+    background: url(./App.jpg);
     color: whitesmoke;
     margin-top: 50px;
-    position: absolute;
+    position: relative;
     font-size: 20px;
     font-style: oblique
+  }
+  .allrequests{
+    margin-top: 50px;
   }
   

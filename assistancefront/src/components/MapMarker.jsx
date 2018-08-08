@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import {Marker} from 'react-google-maps';
-import { MapWindowInfo } from './MapWindowInfo';
-
+import React,{Component} from 'react';
+import { Marker } from 'react-google-maps'
+import MapWindowInfo from './MapWindowInfo';
 export class MapMarker extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.state = {
+ 
+     this.state = {
       showTooltip: false
     }
-
   }
+ 
   clickTooltip() {
     this.setState({ showTooltip: !this.state.showTooltip })
   }
@@ -19,8 +19,7 @@ export class MapMarker extends Component {
   }
   render() {
     const {showTooltip} = this.state
-    const {id,lat, lng, description, title} = this.props
-    
+    const {lat, lng,description,title} = this.props
  
     return(
       <Marker
@@ -28,20 +27,16 @@ export class MapMarker extends Component {
           lat: parseFloat(lat),
           lng: parseFloat(lng)
         }}
-        onClick={this.clickTooltip.bind(this)}
-        key={`marker${id}`}>
+        onClick={this.clickTooltip.bind(this)}>
         {showTooltip && (
-          <MapWindowInfo key={`info${id}`}
-            title={title}
-            description={description}
-             lat={lat}
-             lng={lng}
-            closeWindow={this.closeWindow.bind(this)}/>
+          <MapWindowInfo title={title}
+                          description={description}
+                           closeWindow={this.closeWindow.bind(this)}/>
         )}
-        </Marker>
+      />
+      </Marker>
     );
   }
-
 }
-
-export default MapMarker;
+ 
+export default MapMarker

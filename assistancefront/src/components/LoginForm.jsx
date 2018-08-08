@@ -45,7 +45,7 @@ class LoginForm extends Component{
                 </div>
                 <button type="submit" className="btn btn-primary">Login</button>
                 <hr />
-                <Link to = "/register"><button className="btn btn-link"  onClick ={this.handleLogout}>Register</button></Link>
+                <Link to = "/register"><button className="btn btn-link text-white"  onClick ={this.handleLogout}>Register</button></Link>
                 <button type="button" className="btn btn-link">Reset Password</button>
 
                 </form>

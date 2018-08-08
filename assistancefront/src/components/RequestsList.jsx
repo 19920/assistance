@@ -12,28 +12,33 @@ class RequestsList extends Component{
         fetch('/requests')
           .then(res => res.json())
           .then(res => {
-              console.log(res),
-              this.setState({
-                  requestsList: res.requests,
-                  requestsLoaded: true,
-              })
+             this.setState({
+                 requestsList:res.requests,
+                 requestsLoaded: true
+             })
           }).catch(err => console.log(err))
     }
     renderRequests(){
-        const {requestsList} = this.state;
-        return requestsList.map(request=>{
+        return  this.state.requestsList.map(request=>{
             return(
-                <div className="requests" key={request.id}>
-                <p>{request.description}</p>
+                <div className ="request box-shadow-dark" key ={request.id}>
+                       <p><strong>{request.title}</strong></p>
+                       <p>{request.description}</p>
+                       <p><a href="/">show</a>
+					             <a href="/">Volunteer</a>
+                       </p>
+               
 
                 </div>
             )
         })
     }
+   
     render(){
         return(
         <div className ="request-list">
-        {(this.state.requestsLoaded)?this.renderRequests()
+        {(this.state.requestsLoaded)
+        ?this.renderRequests()
         :<p>Loading...</p>
         }
         </div>
