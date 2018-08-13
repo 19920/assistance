@@ -1,46 +1,22 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Menu, Segment, Image } from 'semantic-ui-react';
+import { Menu, Segment, Image, Dropdown } from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
+import gravitarUrl from 'gravatar-url';
 class TopMenu extends PureComponent {
     render() {
       const isLoggedIn = Object.keys(this.props.user).length > 1 ? true : false
   
       return (
-        <Segment inverted style={{height:'80px'}}>
-          <Menu inverted secondary>
-            <Menu.Item
-              header
-              name="Home"
-              onClick={() => {
-                this.props.history.push('/')
-              }}
-            >
-             
-              Neighborhood
-            </Menu.Item>
-            {isLoggedIn&&
-              <Fragment>
-            <Menu.Item
-              name="Dashboard"
-              onClick={() => {
-                this.props.history.push('/dashboard')
-              }}
-            >
-              Dashboard
-            </Menu.Item>
-  
-            <Menu.Menu position="right">
-              {}
-              <Menu.Item
-                name="Add Request"
-                onClick={() => {
-                  this.props.history.push('/request')
-                }}
-              />
-            </Menu.Menu>
-                </Fragment>}
-          </Menu>
-        </Segment>
+        <Menu secondary pointing>
+        <Menu.Item as={Link}to ="/dashbord">Dashbord</Menu.Item>
+        <Menu.Menu position="right"></Menu.Menu>
+        <Dropdown trigger={<Image avatar src={gravitarUrl(user.email)}/>}>
+        <Dropdown.Item as={Link}to= "/Home">Home</Dropdown.Item>
+        <Dropdown.Item as={Link}to= "/Home">Home</Dropdown.Item>
+        </Dropdown>
+
+        </Menu>
       )
     }
   }

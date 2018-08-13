@@ -1,6 +1,6 @@
 class ApiController < ApplicationController
     def require_login
-        authenticate_token || render_unauthorized('Access denied')
+        authenticate_token || render_unauthorized('You must login or sign in')
     end
     def current_user
         @current_user ||= authenticate_token

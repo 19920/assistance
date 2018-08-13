@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import {Link} from 'react-router-dom';
 
 class RequestsList extends Component{
     constructor(props){
@@ -24,7 +25,7 @@ class RequestsList extends Component{
                 <div className ="request box-shadow-dark" key ={request.id}>
                        <p><strong>{request.title}</strong></p>
                        <p>{request.description}</p>
-                       <p><a href="/">show</a>
+                       <p><Link to="/requests/:id">show</Link>
 					             <a href="/">Volunteer</a>
                        </p>
                
@@ -36,7 +37,8 @@ class RequestsList extends Component{
    
     render(){
         return(
-        <div className ="request-list">
+        <div className ="request-list container">
+        <h3>Requests</h3>
         {(this.state.requestsLoaded)
         ?this.renderRequests()
         :<p>Loading...</p>

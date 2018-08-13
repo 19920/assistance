@@ -1,30 +1,29 @@
 class RequestsController < ApiController
     before_action :require_login,except: [:index,:show]
     def index
-      requests = Request.all 
+      requests = Request.all
       render json: {requests: requests}
     end
     def create
-        request = Request.new request_params
-       request.user_id = current_user.id
+        request = Request.new(request_params)
+        request.user = current_user.id
         if request.save
-            json_response " Request Created  successfully", true, {request: request}, :ok
-        else
-            render json: {
-             measage: "request could not be created"
-            }
+           render json:{
+               message: "ok",
+               request: request,
+        }
         end
     end
     def show
-        if current_user.present? 
+        if current_user.present?
             if current_user.id == @request.user_id
                 json_response "Show  request", true, {
-                    request: @request, 
+                    request: @request,
                     conversation: @request.conversations.includes([:request_owner, :volunteer]).as_json(only: [:id, :request_id], methods: [:request_owner_name, :volunteer_name]),
                     messages: Message.where(request_id: @request.id).reverse_order, }, :ok
-            else 
+            else
            json_response "Show request ", true, {
-            request: @request, 
+            request: @request,
             conversation: @request.conversations.where(volunteer_id: current_user.id).includes([:request_owner, :volunteer]).as_json(only: [:id, :request_id], methods: [:request_owner_name, :volunteer_name]),
             messages: @request.messages.where(volunteer_id: current_user.id).or(@request.messages.where(request_owner_id: current_user.id)).reverse_order,
         }, :ok
@@ -46,9 +45,9 @@ class RequestsController < ApiController
         end
 
     end
-    
+
     private
     def request_parsms
-        params.require(:request).permit(:title, :description, :address, :latitude, :longitude, :request_type, :status)
+        params.require(:request).permit(:title, :description, :address, :request_type)
     end
 end

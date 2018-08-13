@@ -1,19 +1,72 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import { Button, Header, Modal, Form } from 'semantic-ui-react';
-import LoginForm from './LoginForm';
-import RegisterForm from  './RegisterForm';
-import TopMenu from './TopMenu';
-class LoginScreen extends Component {
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+import Login from './LoginForm';
+import Register from './RegisterForm';
+class Loginscreen extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      email:'',
+      password:'',
+      loginscreen:[],
+      loginmessage:'',
+      buttonLabel:'Register',
+      isLogin:true
+    }
+  }
+  componentWillMount(){
+    var loginscreen=[];
+    loginscreen.push(<Login parentContext={this} appContext={this.props.parentContext}/>);
+    var loginmessage = "Not registered yet, Register Now";
+    this.setState({
+                  loginscreen:loginscreen,
+                  loginmessage:loginmessage
+                    })
+  }
+  handleClick(event){
+    // console.log("event",event);
+    var loginmessage;
+    if(this.state.isLogin){
+      var loginscreen=[];
+      loginscreen.push(<Register parentContext={this}/>);
+      loginmessage = "Already registered.Go to Login";
+      this.setState({
+                     loginscreen:loginscreen,
+                     loginmessage:loginmessage,
+                     buttonLabel:"Login",
+                     isLogin:false
+                   })
+    }
+    else{
+      var loginscreen=[];
+      loginscreen.push(<Login parentContext={this}/>);
+      loginmessage = "Not Registered yet.Go to registration";
+      this.setState({
+                     loginscreen:loginscreen,
+                     loginmessage:loginmessage,
+                     buttonLabel:"Register",
+                     isLogin:true
+                   })
+    }
+  }
   render() {
     return (
-      <React.Fragment>
-        <TopMenu />
-        <Route path="/login" exact={true} component={LoginForm} />
-        <Route path="/register" component={RegisterForm} />
-      </React.Fragment>
-    )
+      <div className="loginscreen">
+        {this.state.loginscreen}
+        <div>
+          {this.state.loginmessage}
+          <MuiThemeProvider>
+            <div>
+               <RaisedButton label={this.state.buttonLabel} primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
+           </div>
+          </MuiThemeProvider>
+        </div>
+      </div>
+    );
   }
 }
-
-export default LoginScreen;
+const style = {
+  margin: 15,
+};
+export default Loginscreen;

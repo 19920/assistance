@@ -1,0 +1,22 @@
+.requests{
+
+
+  }
+  .mapAndrequest{
+
+    color: whitesmoke;
+    margin-top: 50px;
+    position: relative;
+    font-size: 20px;
+    font-style: oblique
+  }
+  .allrequests{
+    margin-top: 50px;
+  }
+  .map{
+    margin-top: 50px;
+  }
+.logout{
+  
+  margin: 10px 5px;
+}

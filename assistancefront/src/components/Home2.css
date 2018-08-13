@@ -1,6 +1,6 @@
 .requests{
- 
-    
+
+
   }
   .mapAndrequest{
     background: url(./App.jpg);
@@ -13,4 +13,6 @@
   .allrequests{
     margin-top: 50px;
   }
-  
+  .map{
+    margin-top: 50px;
+  }

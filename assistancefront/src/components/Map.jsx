@@ -37,7 +37,7 @@ export default class Map extends Component {
    
  
     return(
-      <div style={{width: `1150px`, height: `750px`}}>
+      <div style={{width: `1150px`, height: `950px`}}>
         <LocationMap
           locations={requests.map(request =>(<MapMarker lat={request.latitude} lng={request.longitude} description={request.description} title={request.title} />))}
           zoom={this.zoom}

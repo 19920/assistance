@@ -1,27 +1,27 @@
-import React,{Component} from 'react';
-class Header extends Component{
-  render(){
-    return(
-      <header className="masthead" id ="bag">
-        <div className="overlay"></div>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-8 col-md-10 mx-auto">
-              <div className="site-heading">
-                <h3>Jean Baptiste Kadahizi</h3>
-                <h4>Full Stack Developer</h4>
-                <p>Currently following the Full Stack Developer path @ OpenClassrooms</p>
-                <hr className="amsll"/>
-                <span className="subheading">Söderhamn,Sweden</span>
+import React, { Component } from 'react';
+import{Link} from "react-router-dom";
 
-              </div>
+class Header extends Component {
+  render() {
+    return (
+       <header className = "container-fluid head">
+         <Link to="/" className ="nav-brand ">Söderhamn Hjälter</Link>
+         <nav className= "nav navbar-static">
+    	         <ul className ="nav nav-navbar pull-right">
+               <li><Link to ={"/login"}>Login</Link></li>
+               <li><Link to ={"/register"}>Register</Link></li>
+      		       <li><Link to ={"/home"}>Home</Link></li>
+      		       <li><Link to ={"/about"}>About</Link></li>
+      		       <li><Link to ={"/requests"}>Requests</Link></li>
+      		       <li><Link to ={"/myCV"}>My CV</Link></li>
+    	       </ul>
+         </nav>
+       
 
-            </div>
-          </div>
-        </div>
+
       </header>
     );
   }
-
 }
+
 export default Header;

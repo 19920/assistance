@@ -33,7 +33,7 @@ export class MapMarker extends Component {
                           description={description}
                            closeWindow={this.closeWindow.bind(this)}/>
         )}
-      />
+     
       </Marker>
     );
   }

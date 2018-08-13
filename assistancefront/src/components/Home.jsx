@@ -7,9 +7,9 @@ import LoginForm from './LoginForm';
 import RequestsList from './RequestsList';
 import Map from './Map';
 import './Home2.css';
-
 import Contact from './Contact';
 import NewRequest from './NewRequest';
+import Story from './Story';
 import Footer from './Footer';
 class Home extends Component{
   constructor(props){
@@ -18,9 +18,10 @@ class Home extends Component{
       auth :false
     }
     this.handleLogout = this.handleLogout.bind(this);
+    this.addRequest = this.addRequest.bind(this);
   }
   handleLogout(){
-    fetch('/lgout',{
+    fetch('/logout',{
       method: 'DELETE',
       headers:{
         Token: Auth.getToken(),
@@ -34,7 +35,7 @@ class Home extends Component{
     }).catch(err => console.log(err))
   }
   getRequests(){
-    fetch('/requests')
+    fetch('/profile')
       .then(res => res.json())
       .then(res => {
          this.setState({
@@ -64,54 +65,30 @@ class Home extends Component{
     }).then(res => res.json())
       .then(res => {
         console.log(res);
-        this.getRequests();
+        
       }).catch(err=> console(err));
   }
   render(){
     return(
+      <div className ="container-fluid  ">
+      <div className="text-black row mapAndrequest ">
+    
+           <div className ="col-lg-4 ">
+           <NewRequest addRequest={this.addRequest} />
+             </div>
+             <div className ="col-lg-8 ">
+             <Map />
+             </div>
+
+      </div>
+      <div>
+        <Story />
+        </div>
+        <Header />
+</div>
     
       
-      <div className ="container-fluid  ">
-  	         <div className="text-black row mapAndrequest ">
-           
-                  <div className ="col-lg-4 ">
-                  <h2>Add new Request</h2>
-                      <form onSubmit={(e)=>this.props.addRequest(e,this.state)}>
-                      <div className="form-group ">
-                          <label>Title</label><br/>
-                          <input  type="text" name = "title"  value = {this.state.title} onChange = {this.handleChange} />
-                      </div>
-                      <div className="form-group">
-                          <label>description</label><br/>
-                          <input type="text" name = "description"  value = {this.state.description} onChange = {this.handleChange} />
-                      </div>
-                      <div className="form-group">
-                          <label>request_type</label><br/>
-                          <select className="dropdown" value = {this.state.request_type} onChange = {this.handleChange}>
-                              <option>Help</option>
-                              <option>Material</option>
-                              </select>
-                      </div>
-                      <div className="form-group">
-                          <label >address</label><br/>
-                          <input type="text" name = "address"  value = {this.state.address} onChange = {this.handleChange} />
-                      </div>
-                      <button type="submit" className="btn btn-primary">Save</button>
-
-                      </form>
-                    </div>
-                    <div className ="col-lg-8 ">
-                    <Map />
-                    </div>
-
-             </div>
-              <div className="row ">
-              <h6 className=""> Requests</h6>
-              <RequestsList />
-                
-              </div>
-             
-      </div>
+      
     
      
     )
