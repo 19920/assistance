@@ -19,18 +19,25 @@ class RequestsList extends Component{
              })
           }).catch(err => console.log(err))
     }
+    handleVolunteer(){
+
+    }
     renderRequests(){
         return  this.state.requestsList.map(request=>{
             return(
-                <div className ="request box-shadow-dark" key ={request.id}>
-                       <p><strong>{request.title}</strong></p>
-                       <p>{request.description}</p>
-                       <p><Link to="/requests/:id">show</Link>
-					             <a href="/">Volunteer</a>
+                <fieldset className ="request box-shadow-dark container" key ={request.id}>
+                       <p>Title:<strong>{request.title}</strong><br/>
+                       <span>Description:<strong>{request.description}</strong></span><br/>
                        </p>
 
+                     <button><Link to={{pathname: `/request/${request.id}`,
+                         state: {request: request.id}
+                       }}>View</Link></button>
+                     <a href="/volunteer"  type="button"className="text-primary" onClick={this.handleVolunteer.bind(this)} disabled={this.status}>Volunteer</a>
 
-                </div>
+
+
+                </fieldset>
             )
         })
     }

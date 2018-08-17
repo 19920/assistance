@@ -23,6 +23,7 @@ gem 'puma', '~> 3.7'
  gem 'faker', '~> 1.6', '>= 1.6.6'
  gem 'redis'
  gem 'paperclip'
+ gem 'rack-cors'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

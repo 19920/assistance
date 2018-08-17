@@ -9,4 +9,5 @@ class Conversation < ApplicationRecord
 
   delegate :name, to: :request_owner, prefix: true
   delegate :name, to: :volunteer, prefix: true
+  after_create_commit { ConversationBroadcastJob.perform_later(self) }
 end

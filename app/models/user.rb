@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-   
+
     validates_uniqueness_of :email
     has_secure_password
     has_secure_token :auth_token
@@ -7,8 +7,8 @@ class User < ApplicationRecord
     has_many :messages
     has_many :volunteers, class_name: 'Conversation', foreign_key: 'volunteer_id'
     has_many :request_owners, class_name: 'Conversation', foreign_key: 'request_owner_id'
-    
 
+    after_create_commit { RequestBroadcastJob.perform_later(self) }
     def invalidate_token
         self.update_columns(auth_token: nil)
     end

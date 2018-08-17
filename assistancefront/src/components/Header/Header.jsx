@@ -5,7 +5,7 @@ import './Header.css';
 class Header extends Component {
   render() {
     return (
-      <div className="callout primary">
+      <div className="primary">
         <article className=" row grid-container">
           <div className="column-8">
             <h1>{this.props.name}</h1>

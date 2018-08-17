@@ -6,32 +6,21 @@ class RequestsController < ApiController
     end
     def create
         request = Request.new(request_params)
-        request.user = current_user.id
+        request.user = current_user
         if request.save
            render json:{
                message: "ok",
                request: request,
-        }
+        }else
+
+         render json: {message: "could  not be created"}
         end
     end
     def show
-        if current_user.present?
-            if current_user.id == @request.user_id
-                json_response "Show  request", true, {
-                    request: @request,
-                    conversation: @request.conversations.includes([:request_owner, :volunteer]).as_json(only: [:id, :request_id], methods: [:request_owner_name, :volunteer_name]),
-                    messages: Message.where(request_id: @request.id).reverse_order, }, :ok
-            else
-           json_response "Show request ", true, {
-            request: @request,
-            conversation: @request.conversations.where(volunteer_id: current_user.id).includes([:request_owner, :volunteer]).as_json(only: [:id, :request_id], methods: [:request_owner_name, :volunteer_name]),
-            messages: @request.messages.where(volunteer_id: current_user.id).or(@request.messages.where(request_owner_id: current_user.id)).reverse_order,
-        }, :ok
+    
+      request = Request.find(params[:id])
+      render json: {request:request}
 
-            end
-        else
-           json_response "Show request", true, {request: @request}, :ok
-        end
     end
     def destroy
         if current_user @request.user
@@ -47,7 +36,7 @@ class RequestsController < ApiController
     end
 
     private
-    def request_parsms
+    def request_params
         params.require(:request).permit(:title, :description, :address, :request_type)
     end
 end

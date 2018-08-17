@@ -13,6 +13,7 @@ class Home extends Component {
        auth :false,
     };
     this.handleLogout = this.handleLogout.bind(this);
+    this.addRequest = this.addRequest.bind(this);
 
   }
   handleLogout(){
@@ -21,8 +22,8 @@ class Home extends Component {
      method: 'DELETE',
      headers:{
        Token: Auth.getToken(),
-       'Authorization': 'Token ${Auth.getToken()}'
-     }
+       'Authorization': `Token ${Auth.getToken()}`,
+     },
    }).then(res =>{
      Auth.deauthenticateToken();
      this.setState({
@@ -34,13 +35,12 @@ class Home extends Component {
  addRequest(e,data){
     fetch('/requests',{
       method: 'POST',
-      headers:{
-        'Content-type': 'application/json',
-        token: Auth.getToken(),
-        'Authorization': 'Token ${Auth.getToken()}',
+      headers: {
+        'Content-Type': 'application/json',
+         token: Auth.getToken(),
+        'Authorization': `Token ${Auth.getToken()}`,
       },
-      body:
-        JSON.stringfy({
+      body: JSON.stringify({
           request: data,
         }),
 
@@ -61,9 +61,9 @@ class Home extends Component {
 
       	         <div className="row pull-right">
                    <a href="#" onClick={this.handleLogout} className="logout pull-right">Logout</a>
-                    <a href="/Requests" onClick={this.handleLogout} className="logout pull-right">Requests</a>
-                     <a href="/contact" onClick={this.handleLogout} className="logout pull-right">Contact</a>
-                     <a href="#" onClick={this.handleLogout} className="logout pull-right">About</a>
+                    <a href="/Requests"  className="logout pull-right">Requests</a>
+                     <a href="/contact" className="logout pull-right">Contact</a>
+                     <a href="#" className="logout pull-right">About</a>
                     </div>
                     <div className="row">
                       <div className ="medium-4 ">

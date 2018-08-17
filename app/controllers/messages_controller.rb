@@ -7,12 +7,12 @@ class MessagesController < ApiController
            json_response "You must to login ", false, {}, :not_found
             end
      end
-   
+
     def create
     puts params
     user_id = current_user.id
     chat_id = params[:conversation_id]
-   
+
     if Conversation.find( chat_id).present?
         chat = Conversation.find(chat_id)
         if  chat.volunteer_id == user_id || chat.request_owner_id == user_id
@@ -20,7 +20,7 @@ class MessagesController < ApiController
             message.body = message_params["body"]
             message.conversation_id = chat_id
             message.request_owner_id = chat.request_owner_id
-            message.request_id = chat.task_id
+            message.request_id = chat.request_id
             message.volunteer_id = chat.volunteer_id
             if chat.request_owner_id == user_id
               message.owner = true
@@ -34,7 +34,7 @@ class MessagesController < ApiController
         else
             json_response "You're not allowed to reply to this conversation", false, {}, :forbidden
         end
-    else   
+    else
         json_response "messages not found", false, {}, :not_found
     end
     end

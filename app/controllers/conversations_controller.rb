@@ -26,7 +26,7 @@ class ConversationsController < ApiController
         else
           json_response "Error finding conversation", false, {}, :not_found
         end
-      end 
+      end
       def create
         volunteer_id = current_user.id
         if Conversation.between(volunteer_id, @request.id).present?
@@ -39,9 +39,9 @@ class ConversationsController < ApiController
         elsif @request.user_id == volunteer_id
           json_response "You can't volunteer on your own request", false, {}, :unprocessable_entity
         elsif @request.answers_counter > 4 || @request.status>0
-          json_response "This task has too many volunteers already", true, {}, :gone
+          json_response "This Request has too many volunteers already", true, {}, :gone
         else
-          conversation = Conversation.new chat_params
+          conversation = Conversation.new(chat_params)
           conversation.volunteer_id = volunteer_id
           conversation.request_owner_id = @request.user_id
           if conversation.save
@@ -80,5 +80,5 @@ class ConversationsController < ApiController
     json_response "all messages", true, { messages: Message.where(conversation_id: id)}, :ok
   end
 end
-    
+
 end

@@ -13,7 +13,7 @@ class ApiController < ApplicationController
     private
     def authenticate_token
         authenticate_with_http_token do |token,options|
-            user.find_by(auth_token: token)
+            User.find_by(auth_token: token)
     end
 end
 end
